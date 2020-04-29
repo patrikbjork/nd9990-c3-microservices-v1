@@ -1,0 +1,42 @@
+version: "3"
+services:
+ reverseproxy:
+   image: patrikb/reverseproxy
+   ports:
+     - 8080:8080
+   restart: always
+   depends_on:
+    - backend-user
+    - backend-feed   
+ backend-user:
+  image: patrikb/udacity-restapi-user
+  volumes:
+   - $HOME/.aws:/root/.aws
+  environment:
+   POSTGRESS_USERNAME: $UDAGRAM_POSTGRES_USER
+   POSTGRESS_PASSWORD: $UDAGRAM_POSTGRES_PASSWORD 
+   POSTGRESS_DB: $UDAGRAM_POSTGRES_DATABASE
+   POSTGRESS_HOST: $UDAGRAM_POSTGRES_HOST
+   AWS_REGION: $UDAGRAM_AWS_REGION 
+   AWS_PROFILE: $UDAGRAM_AWS_PROFILE 
+   AWS_BUCKET: $UDAGRAM_AWS_MEDIA_BUCKET
+   JWT_SECRET: $UDAGRAM_JWT_SECRET
+   URL: "http://localhost:8100"
+ backend-feed:
+  image: patrikb/udacity-restapi-feed
+  volumes:
+   - $HOME/.aws:/root/.aws
+  environment:
+   POSTGRESS_USERNAME: $UDAGRAM_POSTGRES_USER
+   POSTGRESS_PASSWORD: $UDAGRAM_POSTGRES_PASSWORD
+   POSTGRESS_DB: $UDAGRAM_POSTGRES_DATABASE
+   POSTGRESS_HOST: $UDAGRAM_POSTGRES_HOST
+   AWS_REGION: $UDAGRAM_AWS_REGION
+   AWS_PROFILE: $UDAGRAM_AWS_PROFILE
+   AWS_BUCKET: $UDAGRAM_AWS_MEDIA_BUCKET
+   JWT_SECRET: $UDAGRAM_JWT_SECRET
+   URL: "http://localhost:8100"
+ frontend:
+  image: patrikb/udacity-frontend
+  ports:
+   - "8100:80"
