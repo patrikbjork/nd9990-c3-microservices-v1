@@ -15,5 +15,5 @@ services:
  frontend:
   build:
    context: ../../udacity-c3-frontend 
-  image: patrikb/udacity-frontend:local
+  image: patrikb/udacity-frontend
 
