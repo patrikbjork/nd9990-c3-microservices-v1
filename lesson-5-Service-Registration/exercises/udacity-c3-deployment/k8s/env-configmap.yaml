@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  AWS_BUCKET: patrik-udagram-dev
+  AWS_PROFILE: default
+  AWS_REGION: eu-north-1
+  JWT_SECRET: ajsldasvjeirieiwoi
+  POSTGRESS_DB: postgres
+  POSTGRESS_HOST: udagram-psql.chekodihskml.eu-north-1.rds.amazonaws.com
+  URL: http://a69bc3dc8c87e41118d84e6e8c6bd12d-1104670868.eu-north-1.elb.amazonaws.com
+metadata:
+  name: env-config

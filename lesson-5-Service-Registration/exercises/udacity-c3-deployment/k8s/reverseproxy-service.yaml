@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: reverseproxy
+  namespace: default
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+  selector:
+    service: reverseproxy
+  type: LoadBalancer
+
