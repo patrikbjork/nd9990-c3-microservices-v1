@@ -1,14 +1,13 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  labels:
-    service: reverseproxy
   name: reverseproxy
+  namespace: default
 spec:
   ports:
-  - name: "8080"
-    port: 8080
-    targetPort: 8080
+    - protocol: TCP
+      port: 8080
   selector:
     service: reverseproxy
-#  type: LoadBalancer    
+  type: LoadBalancer
+
